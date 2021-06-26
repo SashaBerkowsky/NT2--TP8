@@ -1,0 +1,84 @@
+
+<section class="src-componentes-alumno-form">
+  <div class = 'jumbotron p-3 '>
+    <h2>Formulario</h2>
+    <hr/>
+
+    <!-- Cambiar @submit.prevent segun envarThenCatch o enviarAsync -->
+    <div class="container-fluid">
+      <vue-form :state="formState" novalidate @submit.prevent="enviar()">
+        <!-- Nombre -->
+        <validate tag="div">
+          <label for="nombre">Nombre</label>
+          <input 
+            type="text" 
+            name="nombre"
+            id="nombre" 
+            class="form-control"
+            required
+            :minlength="nombreLengthMin"
+            :maxlength="nombreLengthMax"
+            v-model.trim="formData.nombre"
+            placeholder='Ingrese el nombre del alumno'
+            autocomplete="off"
+            sin-espacios
+          >
+          <field-messages name="nombre" show="$dirty">
+            <div slot="required" class="alert alert-danger mt-2">Nombre requerido</div>
+            <div slot="minlength" class="alert alert-danger mt-2">El nombre debe tener minimo {{nombreLengthMin}} caracteres</div>
+            <div slot="maxlength - 1" class="alert alert-danger mt-2">Maximo de caracteres ({{nombreLengthMax}}) alcanzados</div>
+
+          </field-messages>
+        </validate>
+  
+        <!-- Email -->
+        <validate tag="div" class="pt-2">
+          <label for="email">Email</label>
+          <input 
+            type="email" 
+            id="email" 
+            name="email"
+            class="form-control"
+            v-model.trim ='formData.email'
+            placeholder='Ingrese el email del alumno'
+            required
+            autocomplete="off"
+
+          >
+          <field-messages name="email" show="$dirty">
+            <div slot="required" class="alert alert-danger mt-2">Email requerido</div>
+            <div slot="email" class="alert alert-danger mt-2">Email invalido</div>
+          </field-messages>
+        </validate>
+
+        <!-- Edad -->
+        <validate tag="div" class="pt-2">
+          <label for="edad">Edad</label>
+          <input 
+            type="number" 
+            id="edad" 
+            name="edad"
+            class="form-control"
+            required
+            :min="edadMin"
+            :max="edadMax"
+            v-model.number="formData.edad"
+            placeholder='Ingrese la edad del alumno'
+            autocomplete="off"
+
+          >
+          <field-messages name="edad" show="$dirty">
+            <div slot="required" class="alert alert-danger mt-2">Edad requerida</div>
+            <div slot="min" class="alert alert-danger mt-2">La edad minima es de {{edadMin}}</div>
+            <div slot="max" class="alert alert-danger mt-2">La edad maxima es de {{edadMax}}</div>
+          </field-messages>
+        </validate>
+  
+        <button class="btn btn-light mt-3 me-3" type="submit">Enviar</button>
+      </vue-form>
+      
+    </div>
+    <hr/>
+  </div>
+</section>
+
